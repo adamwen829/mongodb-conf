@@ -1,0 +1,22 @@
+# Add mongodb user
+sudo useradd -r mongodb
+# log file path
+sudo mkdir /var/log/mongodb
+# data file path
+sudo mkdir /var/lib/mongodb
+sudo chown mongodb /var/lib/mongodb
+
+# Copy the init script and config file
+echo "Copying init script to /etc/init.d/mongod"
+sudo cp ./etc/init.d/mongodb /etc/init.d/mongodb
+sudo chmod +x /etc/init.d/mongodb
+
+echo "Copying configuration file to /etc/mongodb.conf"
+sudo cp ./etc/mongodb.conf /etc/mongodb.conf
+
+echo "Installing mongod as a service"
+# Install mongod as a service
+# /sbin/chkconfig mongod on
+sudo update-rc.d mongodb defaults
+
+echo "Installer complete!"
